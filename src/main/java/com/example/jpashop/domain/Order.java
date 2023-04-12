@@ -1,7 +1,9 @@
 package com.example.jpashop.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.aspectj.weaver.ast.Or;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @Table(name = "orders")
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) //Order 객체 생성방법을 제한 한다. createOrder로만 Order객체를 생성할 수 있다.
 public class Order {
     @Id
     @GeneratedValue
@@ -32,6 +35,7 @@ public class Order {
     private LocalDateTime orderDate; // 주문시간
 
     private OrderStatus status; //주문상태 ORDER, CANCEL
+
 
     // 연관관계 메서드
     public void setMember(Member member) {

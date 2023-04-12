@@ -2,12 +2,15 @@ package com.example.jpashop.domain;
 
 import com.example.jpashop.domain.item.Item;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) //Order 객체 생성방법을 제한 한다. createOrder로만 Order객체를 생성할 수 있다.
 public class OrderItem {
     @Id
     @GeneratedValue
@@ -47,6 +50,6 @@ public class OrderItem {
      * 주문상품 전체 가격 조회
      */
     public int getTotalPrice() {
-        return getTotalPrice() * getCount();
+        return getOrderPrice() * getCount();
     }
 }
