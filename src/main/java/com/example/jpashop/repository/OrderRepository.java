@@ -1,8 +1,8 @@
 package com.example.jpashop.repository;
 
-import com.example.jpashop.api.OrderSimpleApiController;
 import com.example.jpashop.domain.Member;
 import com.example.jpashop.domain.Order;
+import com.example.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
@@ -96,13 +96,6 @@ public class OrderRepository {
         ).getResultList();
     }
 
-    public List<OrderSimpleQueryDto> findOrderDtos() {
-       return em.createQuery(
-                "select new com.example.jpashop.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address )"+
-                        " from Order o" +
-                        " join o.member m" +
-                        " join o.delivery d", OrderSimpleQueryDto.class)
-                .getResultList();
-    }
+
 
 }
