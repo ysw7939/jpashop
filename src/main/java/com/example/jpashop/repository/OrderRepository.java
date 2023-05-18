@@ -97,9 +97,15 @@ public class OrderRepository {
     }
 
 
-//    public List<Order> findAllWithItem() {
-//        return em.createQuery(
-//                "select o from Order o"
-//        )
-//    }
+
+
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                "select distinct o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi" +
+                        " join fetch oi.item i", Order.class)
+                .getResultList(); // 페이징 처리를 할수 없다. 중복된 데이터를 포함해서 페이징 하기 때문에 db에서 페이징 처리를 할수 없고 메모리에서 페이징 처리를 한다.
+    }
 }
